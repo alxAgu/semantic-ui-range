@@ -54,6 +54,7 @@ Notice the settings object you pass into the jQuery function in step 3. There ar
 	* value (number) - the updated value of the slider
 	* meta (object) - a hash with properties:
 		* `triggeredByUser` (boolean). `true` unless the change was triggered programmatically using `set value`. Useful for preventing infinite loops if you are calling a method that will call `set value`.
+	* element (DOM) - the DOM element that triggered the action. Set to undefined when the `set value` method is used.
 
 ## *Getting* the slider value programmatically
 
@@ -84,7 +85,7 @@ If you're running code in your `onChange` callback that calls the `set value` me
 		min: 0,
 		max: 100,
 		start: 5,
-		onChange: function(value, meta) {
+		onChange: function(value, meta, el) {
 			if(meta.triggeredByUser) {
 				// now you can run code that will call `set value`
 			}

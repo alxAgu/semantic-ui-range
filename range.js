@@ -144,12 +144,12 @@ $.fn.range = function(parameters) {
 					else return Math.round(ratio * $(inner).width()) + $(trackLeft).position().left - offset;
 				},
 
-				setValue: function(newValue, triggeredByUser = true) {
+				setValue: function(newValue, triggeredByUser = true, element) {
 					if(settings.input) {
 						$(settings.input).val(newValue);
 					}
 					if(settings.onChange) {
-						settings.onChange(newValue, {triggeredByUser: triggeredByUser});
+						settings.onChange(newValue, {triggeredByUser: triggeredByUser}, element);
 					}
 				},
 
@@ -191,7 +191,7 @@ $.fn.range = function(parameters) {
 						if ((!vertical && (pageX >= left && pageX <= right)) || (vertical && (pageY >= top && pageY <= height))) {
 							if (vertical) module.setPosition(height - pageY - offset);
 							else module.setPosition(pageX - left - offset);
-							module.setValue(value);
+							module.setValue(value, true, element);
 						}
 						// set new position & value
 						var rangeMousemove = function(mmEvent) {
@@ -212,7 +212,7 @@ $.fn.range = function(parameters) {
 								if (value >= settings.min && value <= settings.max) {
 									if (vertical) module.setPosition(height - pageY - offset);
 									else module.setPosition(pageX - left - offset);
-									module.setValue(value);
+									module.setValue(value, true, element);
 								}
 							}
 						}
